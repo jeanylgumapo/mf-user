@@ -60,7 +60,7 @@ const Dashboard = () => {
                 <Text> Popular Mechanic</Text>
                 <Text> View All</Text>
             </View>
-            <View style={tailwind`flex items-center`}>
+            <View style={tailwind`flex`}>
                 <View style={tailwind`flex-row bg-gray-50 rounded-xl p-4`}>
                     <Image style={{ width: 64, height: 64 }} source ={require('../../../assets/user.png')}/> 
                     <View>

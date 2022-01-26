@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ActivityScreen from '../screen/Dashboard/Activity';
 import WalletScreen from '../screen/Dashboard/Wallet';
 import ProfileScreen from '../screen/Dashboard/Profile';
+import CheckEmailScreen from '../screen/Auth/CheckEmail';
 
 
 const Stack= createNativeStackNavigator();
@@ -58,7 +59,7 @@ const Navigation = () => {
                     </>
                     )
                 )}             */}
-                 {/* <Stack.Screen 
+                 <Stack.Screen 
                             name="Home" 
                             component={HomeScreen}
                             options={{headerShown:false}}
@@ -72,7 +73,7 @@ const Navigation = () => {
                             name="Register" 
                             component={RegisterScreen}
                             options={{headerStyle: {backgroundColor: '#0078B7',color:'#fff',}, title:'Register'}}
-                        />                   */}
+                        />                  
                          <Stack.Screen 
                             name="Dashboard" 
                             component={DrawerRoutes}
@@ -106,7 +107,15 @@ function ForgotPass() {
                 headerStyle:  
                 {backgroundColor: '#0078B7'}, 
                 title:'Mr Fixxy'
-                }} />    
+                }} />   
+        <Stack.Screen 
+            name="CheckEmail" 
+            component={CheckEmailScreen} 
+            options={{
+                headerStyle:  
+                {backgroundColor: '#0078B7'}, 
+                title:'Mr Fixxy'
+                }} />   
       </Stack.Navigator>
     );
   }

@@ -30,10 +30,10 @@ const ForgotPasswordScreen = ({navigation}) => {
                         />
                         <Button  
                             title='Send Instruction' 
-                            // onPress={() => 
-                            //     {login(email, password)}
-                            //     // navigation.navigate('Dashboard')
-                            // }
+                            onPress={() => 
+                               
+                                navigation.navigate('CheckEmail')
+                            }
                             titleStyle={{ fontWeight: '700' }}
                             buttonStyle={{
                             backgroundColor: '#0078B7',
