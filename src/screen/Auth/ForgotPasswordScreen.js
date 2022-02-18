@@ -12,7 +12,7 @@ const ForgotPasswordScreen = ({navigation}) => {
 
     return (
         <View style={tailwind`bg-primary flex`}>
-            <View style={tailwind`h-full bg-white rounded-t-20`}>
+            <View style={tailwind`h-full bg-white `}>
                 <View style={tailwind`m-8 text-left `}>
                     <Text style={tailwind`my-4 font-bold text-3xl text-primary-color`}>Forgot Password?</Text>
                     <Text>Enter the email associated with your account

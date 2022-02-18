@@ -8,6 +8,8 @@ import SubCategoryScreen from './src/screen/Dashboard/SubCetagory';
 // import CategoryScreen from './src/screen/Dashboard/Category';
 LogBox.ignoreLogs([
     "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
+    "componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details."
+
   ]);
 const App = () => {
     return (

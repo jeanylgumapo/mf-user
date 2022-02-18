@@ -9,6 +9,8 @@ export const AuthProvider=({children})=> {
     const [userInfo, setUserInfo] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [splashLoading, setSplashLoading]=useState(false);
+    //user type 3 for customer
+    const [user_type, setUserType]=useState("3");
     const register=(name, email,mobile_no, password, password_confirmation, navigation) =>{
         setIsLoading(true);
         axios.post(`${BASE_URL}/register`, {
@@ -17,6 +19,7 @@ export const AuthProvider=({children})=> {
             mobile_no,
             password,
             password_confirmation,
+            user_type,
         }).then(res =>{
             let userInfo = res.data;
             setUserInfo(userInfo);
@@ -31,11 +34,12 @@ export const AuthProvider=({children})=> {
         });
     }
 
-    const login=(email, password, navigation) =>{
+    const login=(email, password, navigation, app) =>{
         setIsLoading(true);
         axios.post(`${BASE_URL}/login`, {
             email,
             password,
+            app,
         })
         .then(res => {
             let userInfo= res.data;

@@ -1,30 +1,44 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, { useState } from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import tailwind from 'tailwind-react-native-classnames';
+import CategoryCard from '../../components/CategoryCard';
 
-const CategoryScreen = () => {
+// const categories
+const CategoryScreen = ({navigation}) => {
+    const [categories, setCategories] =useState([
+        {
+            title: 'Maintenance',
+            key: '1'
+        },
+        {
+            title: 'CHange Oil',
+            key: '2'
+        },
+        {
+            title: 'Battery',
+            key:'3'
+        }
+    ]);
     return (
         <View >
             <Text> Service Category</Text>
-            <View style={tailwind`flex flex-row flex-wrap p-4 items-center`}>
-            
-                <View style={tailwind`bg-primary category-card-size-1 m-2 items-center rounded-xl`}>
-                    <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                    <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
+            <View style={tailwind`flex items-center  p-4`}>
+                <View style={tailwind` flex-row flex-wrap `}>
+                {
+                            categories.map((item) => {
+                                return (
+                                    <View key={item.key}>
+                                        {/* <Text>{item.title}</Text> */}
+                                        <TouchableOpacity onPress={() => navigation.navigate('SubCategory')}>
+                                            <CategoryCard label={item.title} />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })
+                        }
                 </View>
-                <View style={tailwind`bg-primary category-card-size-1 m-2 items-center rounded-xl`}>
-                    <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                    <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-                </View>
-                <View style={tailwind`bg-primary category-card-size-1 m-2 items-center rounded-xl`}>
-                    <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                    <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-                </View>
-                <View style={tailwind`bg-primary category-card-size-1 m-2 items-center rounded-xl`}>
-                    <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                    <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-                </View>
+                
             </View>
         </View>
     )

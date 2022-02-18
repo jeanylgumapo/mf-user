@@ -1,60 +1,105 @@
-import React, { useContext } from 'react';
-import {Text, View,ScrollView, Image, Button} from 'react-native';
+import React, { useContext, useState } from 'react';
+import {Text, View,ScrollView, Image, Button, TouchableOpacity, FlatList} from 'react-native';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import tailwind from 'tailwind-react-native-classnames';
 import { globalStyles } from '../../styles/global';
 import { Input, Icon } from 'react-native-elements';
-import { MaterialCommunityIcons, AntDesign  } from '@expo/vector-icons'; 
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesome } from '@expo/vector-icons'; 
+import CategoryCard from '../../components/CategoryCard';
+import ServiceCard from '../../components/ServiceCard';
 
-const Dashboard = () => {
+
+const Dashboard = ({navigation}) => {
     const {userInfo, isLoading, logout}= useContext(AuthContext);
+    const [categories, setCategories] =useState([
+        {
+            title: 'Maintenance',
+            key: '1'
+        },
+        {
+            title: 'CHange Oil',
+            key: '2'
+        },
+        {
+            title: 'Battery',
+            key:'3'
+        }
+    ]);
+    const [packages, setPackages] =useState([
+        {
+            title: 'Major Service',
+            key: '1'
+        },
+        {
+            title: 'Full Service',
+            key: '2'
+        },
+        {
+            title: 'Basic Service',
+            key:'3'
+        }
+    ]);
     return (
         <View style={tailwind`bg-white h-full`}> 
-        <View>
-            <View style={tailwind`bg-secondary rounded-b-20`}>
-            {/* <Spinner visible={isLoading} /> */}
-            <View>
+            <View style={tailwind`m-4`}> 
+                <Image style={tailwind`w-full h-40 rounded-20`} source ={require('../../../assets/ads.jpg')}/> 
+                <View>              
+                    {/* <Spinner visible={isLoading} /> */}
+
+                    <View style={tailwind`my-4`}>
+                        <Text style={tailwind`font-bold text-lg `}> Select Car Services</Text>
+                      <View style={tailwind`flex-row`}>
+                      {
+                            packages.map((item) => {
+                                return (
+                                    <View key={item.key}>
+                                        {/* <Text>{item.title}</Text> */}
+                                        <TouchableOpacity 
+                                        onPress={() => navigation.navigate('BookingRoute', {item})}
+                                        >
+                                            <ServiceCard label={item.title} />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+                    </View>
+                    <View style={tailwind`flex flex-row`}>
+                        <View style={tailwind`items-end w-2/4 items-start`}><Text style={tailwind`font-bold text-lg `}>Other Services </Text></View>
+                        {/* <View style={tailwind`items-end w-2/4`}><TouchableOpacity onPress={() => navigation.navigate('Category')}><Text style={tailwind`font-bold`}> View All</Text></TouchableOpacity></View> */}
+                    </View>
+                    </View>
+                    <View style={tailwind`flex flex-row flex-nowrap`}>                                              
+                        {
+                            categories.map((item) => {
+                                return (
+                                    <View key={item.key}>
+                                        {/* <Text>{item.title}</Text> */}
+                                        <TouchableOpacity>
+                                            <CategoryCard label={item.title} />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
                 <View>
-                        <Text style={tailwind`text-left font-bold text-xl text-white`}>Search for a Servicing?</Text>
-                        <Text style={tailwind`text-sm text-white`}>Due for an Oil Change?</Text>
-                    </View>            
-                <Input
-                    placeholder='Search'                
-                    // style={tailwind`bg-white m-2 border-0 border-none`}                               
-        />    
-               
-            </View>
-            <View style={tailwind`flex flex-row mb`}>
-                    <Text> Select Category</Text>
-                    <View style={tailwind`items-end`}><Text> View All</Text></View>
+                    <Text style={tailwind`font-bold text-lg`}> Latest Updates</Text>
                 </View>
             </View>
-            <View style={tailwind`flex flex-row flex-nowrap mt10`}>
-            <View style={tailwind`bg-primary category-card-size m-2 items-center rounded-xl`}>
-                <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-            </View>
-            <View style={tailwind`bg-primary category-card-size m-2 items-center rounded-xl`}>
-                <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-            </View>
-            <View style={tailwind`bg-primary category-card-size m-2 items-center rounded-xl`}>
-                <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-            </View>
-            <View style={tailwind`bg-primary category-card-size m-2 items-center rounded-xl`}>
-                <MaterialCommunityIcons name="engine-outline" size={32} color="white" />
-                <Text style={tailwind`text-xs text-white`}> Maintenance</Text>
-            </View>
-        </View>
-        </View>
-        <ScrollView>
-        <View >
-        <Image style={tailwind`w-full h-40 mt10 rounded-20`} source ={require('../../../assets/ads.jpg')}/> 
-        </View>
+            
+            {/* <FlatList
+                data={categories}
+                renderItem={({ item }) => (
+                <Text style={tailwind`text-gray-400`}>{item.title}</Text>
+                    
+                )}
+            /> */}
+
+        {/* <ScrollView>
         <View style={tailwind`flex`}>
             <View style={tailwind`flex-row m-2`}>
                 <Text> Popular Mechanic</Text>
@@ -71,15 +116,16 @@ const Dashboard = () => {
                         <View style={tailwind`items-end`}><AntDesign name="rightcircle" size={24} color="#0078B7" /></View>
                     </View>
                 </View>
-            </View>
+            </View> 
         </View>
-        </ScrollView>
+        </ScrollView> */}
         {/* <Text> Welcome {userInfo.user.name}</Text> */}
         
         {/* <Image style={{ width: 40, height: 40 }} source ={require('../../../assets/maintenance.png')}/> */}
         
         {/* <Text> Welcome {userInfo.user.name}</Text>
             <Button title='Logout' onPress={logout}/> */}
+             
         </View>
     )
 };

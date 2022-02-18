@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements';
 const HomeScreen = ({navigation}) => {
     return (
         <View style={tailwind`bg-white flex-col-reverse flex h-full`}>   
-            <View style={tailwind`rounded-t-lg bg-white my-8 mx-4`}>         
+            <View style={tailwind`bg-white my-8 mx-4`}>         
                 <Button 
                     titleStyle={{ fontWeight: '700' }, {color:'#0078B7'}}
                     buttonStyle={{
